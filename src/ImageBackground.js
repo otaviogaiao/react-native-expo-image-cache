@@ -33,14 +33,17 @@ export default class Image extends React.Component<ImageProps, ImageState> {
 
     state = {
         uri: undefined,
-        intensity: new Animated.Value(100)
+        intensity: new Animated.Value(100),
+        error: false
     };
 
     async load({ uri, options = {} }: ImageProps): Promise<void> {
         if (uri) {
             const path = await CacheManager.get(uri, options).getPath();
             if (path && this.mounted) {
-                this.setState({ uri: path });
+                this.setState({ uri: path, error: false });
+            } else if (!path && this.mounted) {
+                this.setState({ uri: undefined, error: true });
             }
         }
     }
@@ -69,7 +72,10 @@ export default class Image extends React.Component<ImageProps, ImageState> {
 
     render(): React.Node {
         const { preview, style, defaultSource, tint, ...otherProps } = this.props;
-        const { uri, intensity } = this.state;
+        const { uri, intensity, error } = this.state;
+        if (error) {
+            return <View {...{ style }}>{this.props.children}</View>;
+        }
         const hasDefaultSource = !!defaultSource;
         const hasPreview = !!preview;
         const isImageReady = !!uri;

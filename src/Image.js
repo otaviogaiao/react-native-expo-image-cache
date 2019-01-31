@@ -69,7 +69,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
     }
 
     render(): React.Node {
-        const {preview, style, defaultSource, tint, ...otherProps} = this.props;
+        const {preview, style, defaultSource, tint, previewResizeMode, ...otherProps} = this.props;
         const {uri, intensity} = this.state;
         const hasDefaultSource = !!defaultSource;
         const hasPreview = !!preview;
@@ -101,7 +101,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
                     hasPreview && (
                         <RNImage
                             source={preview}
-                            resizeMode="cover"
+                            resizeMode={previewResizeMode || "cover"}
                             style={computedStyle}
                             blurRadius={Platform.OS === "android" ? 0.5 : 0}
                         />
@@ -136,6 +136,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
 const black = "black";
 const white = "white";
 const propsToCopy = [
-    "borderRadius", "borderBottomLeftRadius", "borderBottomRightRadius", "borderTopLeftRadius", "borderTopRightRadius"
+    "borderRadius", "borderBottomLeftRadius", "borderBottomRightRadius", "borderTopLeftRadius", "borderTopRightRadius",
+    "width", "height"
 ];
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);

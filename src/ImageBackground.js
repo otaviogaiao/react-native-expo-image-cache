@@ -137,6 +137,8 @@ const propsToCopy = [
     "borderBottomLeftRadius",
     "borderBottomRightRadius",
     "borderTopLeftRadius",
-    "borderTopRightRadius"
+    "borderTopRightRadius",
+    "width",
+    "height"
 ];
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);

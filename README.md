@@ -28,6 +28,7 @@ yarn add react-native-expo-image-cache
 | ------------- |:-------------:| -----:|
 | tint      | dark | light, dark, default |
 | transitionDuration     | 300      | custom in ms |
+| previewResizeMode | 'cover' | same of image
 
 
 ### <Image>

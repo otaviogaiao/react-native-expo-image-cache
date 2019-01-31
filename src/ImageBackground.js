@@ -71,7 +71,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
     }
 
     render(): React.Node {
-        const { preview, style, defaultSource, tint, ...otherProps } = this.props;
+        const { preview, style, defaultSource, tint, previewResizeMode, ...otherProps } = this.props;
         const { uri, intensity, error } = this.state;
         if (error) {
             return <View {...{ style }}>{this.props.children}</View>;
@@ -101,7 +101,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
                 {hasPreview && (
                     <RNImageBackground
                         source={preview}
-                        resizeMode="cover"
+                        resizeMode={previewResizeMode || "cover"}
                         style={computedStyle}
                         blurRadius={Platform.OS === "android" ? 0.5 : 0}
                     >

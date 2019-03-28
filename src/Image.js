@@ -70,7 +70,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
     }
 
     render(): React.Node {
-        const {preview, style, defaultSource, tint, previewResizeMode, ...otherProps} = this.props;
+        const {preview, style, defaultSource, tint, previewResizeMode, defaultSourceResizeMode ,...otherProps} = this.props;
         const {uri, intensity} = this.state;
         const hasDefaultSource = !!defaultSource;
         const hasPreview = !!preview;

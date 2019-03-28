@@ -16,7 +16,8 @@ type ImageProps = {
     uri: string,
     transitionDuration?: number,
     tint?: "dark" | "light",
-    defaultSourceResizeMode?: string
+    defaultSourceResizeMode?: string,
+    defaultSourceStyle?: ImageStyle
 };
 
 type ImageState = {
@@ -70,7 +71,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
     }
 
     render(): React.Node {
-        const {preview, style, defaultSource, tint, previewResizeMode, defaultSourceResizeMode ,...otherProps} = this.props;
+        const {preview, style, defaultSource, tint, previewResizeMode, defaultSourceResizeMode, defaultSourceStyle, ...otherProps} = this.props;
         const {uri, intensity} = this.state;
         const hasDefaultSource = !!defaultSource;
         const hasPreview = !!preview;
@@ -93,7 +94,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
                     (hasDefaultSource && !hasPreview && !isImageReady) && (
                         <RNImage
                             source={defaultSource}
-                            style={computedStyle}
+                            style={defaultSourceStyle || computedStyle}
                             resizeMode={defaultSourceResizeMode || "cover"}
                             {...otherProps}
                         />

@@ -15,7 +15,8 @@ type ImageProps = {
     options?: DownloadOptions,
     uri: string,
     transitionDuration?: number,
-    tint?: "dark" | "light"
+    tint?: "dark" | "light",
+    defaultSourceResizeMode?: string
 };
 
 type ImageState = {
@@ -93,6 +94,7 @@ export default class Image extends React.Component<ImageProps, ImageState> {
                         <RNImage
                             source={defaultSource}
                             style={computedStyle}
+                            resizeMode={defaultSourceResizeMode || "cover"}
                             {...otherProps}
                         />
                     )
